@@ -14,16 +14,29 @@ export default function Home() {
     if (session) {
         return (
             <>
-                Signed in as {session?.token?.email} <br />
+                <div className="flex-auto align-middle justify-items-center">
+                    <div className="align-middle items-center">
+                        Signed in as {session?.token?.email}<br />
+
                 <button onClick={() => signOut()}>Sign out</button>
                 <hr />
+
                 <button onClick={() => getMyPlaylists()}>Get all my playlists</button>
-                {list.map((item) => (
-                    <div key={item.id}>
-                        <h1>{item.name}</h1>
-                        <img src={item.images[0]?.url} width="100" />
-                    </div>
-                ))}
+                        </div>
+
+                <ul role="list" className="divide-y divide-gray-100 flex-none items-center align-middle">
+                    {list.map((item) => (
+                        <li key={item.id} className="flex items-center align-middle gap-x-6 py-5">
+                            <div className="flex gap-x-4 items-center">
+                                <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={item.images[0]?.url} alt="" />
+                                <div className="min-w-0 flex items-center">
+                                    <p className="text-sm font-semibold leading-6 text-gray-900">{item.name}</p>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+                </div>
             </>
         );
     }
